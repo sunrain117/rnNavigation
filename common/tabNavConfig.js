@@ -91,6 +91,11 @@ const tabConfigFn = ({ navigation, screenProps }) => {
                     <Image source={!focused ? ImageManage.tabIcon.home.nomal : ImageManage.tabIcon.home.active} style={[{ height: 30, width: 30 }, { tintColor: tintColor }]}></Image>
                 )
             });
+            config.tabBarOnPress=(({ route, index },jumpToIndex)=>{ 
+                alert(route.routeName+":"+index);
+                // 只有调用jumpToIndex方法之后才会真正的跳转页面。
+                jumpToIndex(index);
+            });
             break;
         case 'TabCar':
             config.tabBarLabel = '车辆管理';
@@ -99,6 +104,11 @@ const tabConfigFn = ({ navigation, screenProps }) => {
                 return (
                     <Image resizeMode="stretch" source={!focused ? ImageManage.tabIcon.car.nomal : ImageManage.tabIcon.car.active} style={[{ height: 30, width: 30 }, { tintColor: tintColor }]}></Image>
                 )
+            });
+            config.tabBarOnPress=(({ route, index },jumpToIndex)=>{ 
+                alert(route.routeName+":"+index);
+                // 只有调用jumpToIndex方法之后才会真正的跳转页面。
+                jumpToIndex(index);
             });
             break;
         case 'TabMy':
