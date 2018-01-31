@@ -20,7 +20,7 @@ export default myApp = TabNavigator({
     },
     TabMy: {
         screen: TabMy,
-       
+
     }
 }, {
         tabBarPosition: 'bottom',//ios 默认bottom，android 默认top
@@ -91,8 +91,10 @@ const tabConfigFn = ({ navigation, screenProps }) => {
                     <Image source={!focused ? ImageManage.tabIcon.home.nomal : ImageManage.tabIcon.home.active} style={[{ height: 30, width: 30 }, { tintColor: tintColor }]}></Image>
                 )
             });
-            config.tabBarOnPress=(({ route, index },jumpToIndex)=>{ 
-                alert(route.routeName+":"+index);
+            //config.tabBarOnPress=(({ route, index },jumpToIndex)=>{ 旧版本的写法
+            config.tabBarOnPress = (({ previousScene, scene, jumpToIndex }) => {
+                const { route, index } = scene;
+                alert(route.routeName + ":" + index);
                 // 只有调用jumpToIndex方法之后才会真正的跳转页面。
                 jumpToIndex(index);
             });
@@ -105,11 +107,11 @@ const tabConfigFn = ({ navigation, screenProps }) => {
                     <Image resizeMode="stretch" source={!focused ? ImageManage.tabIcon.car.nomal : ImageManage.tabIcon.car.active} style={[{ height: 30, width: 30 }, { tintColor: tintColor }]}></Image>
                 )
             });
-            config.tabBarOnPress=(({ route, index },jumpToIndex)=>{ 
-                alert(route.routeName+":"+index);
-                // 只有调用jumpToIndex方法之后才会真正的跳转页面。
-                jumpToIndex(index);
-            });
+            // config.tabBarOnPress=(({ route, index },jumpToIndex)=>{ 
+            //     alert(route.routeName+":"+index);
+            //     // 只有调用jumpToIndex方法之后才会真正的跳转页面。
+            //     jumpToIndex(index);
+            // });
             break;
         case 'TabMy':
             config.tabBarLabel = '我的';
